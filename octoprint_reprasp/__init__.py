@@ -9,7 +9,7 @@ import octoprint.plugin
 
 class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.TemplatePlugin,
-                    octoprint.plugin.SettingsPlugin
+                    octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.AssetPlugin):
     def on_after_startup(self):
             self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["url"]))
