@@ -7,15 +7,20 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 
-class RepraspPlugin(octoprint.plugin.TemplatePlugin):
-	# TODO Implement me!
-	pass
+class RepraspPlugin(octoprint.plugin.StartupPlugin,
+                    octoprint.plugin.TemplatePlugin,
+                    octoprint.plugin.SettingsPlugin):
+    def on_after_startup(self):
+            self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["url"]))
+            
+    def get_settings_defaults(self):
+            return dict(url="https://en.wikipedia.org/wiki/Hello_world")
+            
+    def get_template_configs(self):
+        return [
+            dict(type="navbar", custom_bindings=False),
+            dict(type="settings", custom_bindings=False)
+        ]
 
-# If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
-# ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
-# can be overwritten via __plugin_xyz__ control properties. See the documentation for that.
 __plugin_name__ = "RepRasp UI"
-
-def __plugin_load__():
-	global __plugin_implementation__
-	__plugin_implementation__ = RepraspPlugin()
+__plugin_implementation__ = RepraspPlugin()
