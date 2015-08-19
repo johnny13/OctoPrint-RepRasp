@@ -15,7 +15,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["url"]))
             
     def get_settings_defaults(self):
-            return dict(url="https://en.wikipedia.org/wiki/Hello_world")
+            return dict(url="https://huement.com")
             
     def get_template_configs(self):
         return [
@@ -25,7 +25,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
 
     def get_assets(self):
          return dict(
-             js=["js/reprasp.js"]
+             js=["js/reprasp.js"],
              css=["css/reprasp.css"],
              less=["less/reprasp.less"]
          )
