@@ -9,7 +9,8 @@ import octoprint.plugin
 
 class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.TemplatePlugin,
-                    octoprint.plugin.SettingsPlugin):
+                    octoprint.plugin.SettingsPlugin
+                    octoprint.plugin.AssetPlugin):
     def on_after_startup(self):
             self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["url"]))
             
@@ -22,5 +23,12 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             dict(type="settings", custom_bindings=False)
         ]
 
+    def get_assets(self):
+         return dict(
+             js=["js/reprasp.js"]
+             css=["css/reprasp.css"],
+             less=["less/reprasp.less"]
+         )
+         
 __plugin_name__ = "RepRasp UI"
 __plugin_implementation__ = RepraspPlugin()
