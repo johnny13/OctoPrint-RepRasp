@@ -6,16 +6,24 @@ from __future__ import absolute_import
 # as well as the plugin mixins it's subclassing from. This is really just a basic skeleton to get you started.
 
 import octoprint.plugin
+import flask
 
 class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.TemplatePlugin,
                     octoprint.plugin.SettingsPlugin,
-                    octoprint.plugin.AssetPlugin):
+                    octoprint.plugin.AssetPlugin,
+                    octoprint.plugin.BlueprintPlugin):
+    @octoprint.plugin.BlueprintPlugin.route("/reprasp", methods=["GET"])
+    def myEcho(self):
+            if not "text" in flask.request.values:
+                return flask.make_response("Expected a text to echo back.", 400)
+            return flask.request.values["text"]
+            
     def on_after_startup(self):
             self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["url"]))
             
     def get_settings_defaults(self):
-            return dict(url="https://huement.com")
+            return dict(url=flask.url_for("plugin.reprasp.myEcho"))
             
     def get_template_configs(self):
         return [
