@@ -33,6 +33,10 @@ $(function() {
             value = value.replace("##API##", apiurl);
             console.debug(apiurl);
             $("#repraspapi").val(value);
+            
+            var oldlink = $("#reprasp-minilink").attr("href");
+            oldlink = oldlink.replace("##API##", apiurl);
+            $("#reprasp-minilink").attr("href",oldlink);
         }
         
         
