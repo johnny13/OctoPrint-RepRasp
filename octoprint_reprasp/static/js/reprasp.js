@@ -32,6 +32,7 @@ $(function() {
         
         var value =$("#repraspapi").val();
         value = value.replace("##API##", apiurl);
+        console.debug(apiurl);
         $("#repraspapi").val(value);
     }
 
