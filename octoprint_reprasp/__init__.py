@@ -24,7 +24,8 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             
     def get_settings_defaults(self):
             return [
-                dict(iframeurl="https://www.huement.com")
+                dict(iframeurl="https://www.huement.com"),
+                dict(apiurl=flask.url_for("plugin.reprasp.myEcho")),
                 dict(apiurl="reprasp/echo/?name=test")
             ]
                 
