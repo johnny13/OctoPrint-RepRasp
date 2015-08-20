@@ -13,7 +13,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.AssetPlugin,
                     octoprint.plugin.BlueprintPlugin):
-    @octoprint.plugin.BlueprintPlugin.route("/reprasp", methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
     def myEcho(self):
             if not "text" in flask.request.values:
                 return flask.make_response("Expected a text to echo back.", 400)
@@ -25,7 +25,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
     def get_settings_defaults(self):
             return [
                 dict(iframeurl="https://www.huement.com")
-                dict(apiurl=flask.url_for("plugin.reprasp.myEcho"))
+                dict(apiurl="reprasp/echo/?name=test")
             ]
                 
             
