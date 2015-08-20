@@ -27,6 +27,12 @@ $(function() {
             self.newUrl(self.settings.settings.plugins.reprasp.url());
             self.goToUrl();
         }
+        
+        var apiurl = $("#settings-apikey").val();
+        
+        var value =$("#repraspapi").val();
+        value = value.replace("##API##", apiurl);
+        $("#repraspapi").val(value);
     }
 
     // This is how our plugin registers itself with the application, by adding some configuration
@@ -45,4 +51,6 @@ $(function() {
     ]);
     
     console.debug("RepRasp UI Loading...");
+    
+    
 });
