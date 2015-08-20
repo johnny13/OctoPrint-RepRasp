@@ -14,11 +14,12 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.AssetPlugin,
                     octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
-    @octoprint.plugin.BlueprintPlugin.route("/mini", filename='css/reprasp.css')
+    @octoprint.plugin.BlueprintPlugin.route("/mini", methods=["GET"])
     def myEcho(self):
             if not "text" in flask.request.values:
                 return flask.make_response("Expected a text to echo back.", 400)
             return flask.request.values["text"]
+            
     def miniUi(self):
             return flask.request.values["text"]
             
