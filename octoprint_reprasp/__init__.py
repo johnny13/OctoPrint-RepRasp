@@ -23,7 +23,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["url"]))
             
     def get_settings_defaults(self):
-            return dict(url=flask.url_for("plugin.reprasp.myEcho"))
+            return dict(iframeurl="https://www.huement.com"), huiapiurl=flask.url_for("plugin.reprasp.myEcho"))
             
     def get_template_configs(self):
         return [
