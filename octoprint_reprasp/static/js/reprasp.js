@@ -21,7 +21,8 @@ $(function() {
         // gets called _after_ the settings have been retrieved from the OctoPrint backend and thus
         // the SettingsViewModel been properly populated.
         self.onBeforeBinding = function() {
-           // console.debug(self.settings.settings.plugins.reprasp.apiurl());
+            console.debug("Binding..");
+            console.debug(self.settings.settings.plugins.reprasp.apiurl());
             console.debug(self.settings.settings.plugins.reprasp.iframeurl());
             self.newUrl(self.settings.settings.plugins.reprasp.url());
             self.goToUrl();
