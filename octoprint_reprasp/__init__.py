@@ -13,7 +13,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.AssetPlugin,
                     octoprint.plugin.BlueprintPlugin):
-    @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
+    @octoprint.plugin.RepraspPlugin.route("/echo", methods=["GET"])
     def myEcho(self):
             if not "text" in flask.request.values:
                 return flask.make_response("Expected a text to echo back.", 400)
