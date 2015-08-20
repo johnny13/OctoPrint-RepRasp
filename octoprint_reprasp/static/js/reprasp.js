@@ -22,7 +22,7 @@ $(function() {
         // the SettingsViewModel been properly populated.
         self.onBeforeBinding = function() {
            // console.debug(self.settings.settings.plugins.reprasp.apiurl());
-            console.debug(self.settings.settings.plugins.reprasp.apiurl());
+            console.debug(self.settings.settings.plugins.reprasp.iframeurl());
             self.newUrl(self.settings.settings.plugins.reprasp.url());
             self.goToUrl();
         }
