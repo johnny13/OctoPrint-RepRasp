@@ -37,7 +37,7 @@ $(function() {
             var oldlink = self.settings.settings.plugins.reprasp.miniurl();
             oldlink = oldlink.replace("##API##", apiurl);
             console.debug(oldlink);
-            $("#reprasp-minilink").attr("href",oldlink);
+            self.settings.settings.plugins.reprasp.miniurl() = oldlink;
         }
         
         
