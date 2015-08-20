@@ -34,7 +34,7 @@ $(function() {
             console.debug(apiurl);
             $("#repraspapi").val(value);
             
-            var oldlink = $("#reprasp-minilink").attr("href");
+            var oldlink = $("#reprasp-minilink").data("value");
             oldlink = oldlink.replace("##API##", apiurl);
             $("#reprasp-minilink").attr("href",oldlink);
         }
