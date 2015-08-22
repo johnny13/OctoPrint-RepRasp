@@ -288,12 +288,12 @@ function loadurl(){
   var apivalue = getURLParameters( url );
   console.debug(apivalue);
   
-  GlobalURL = someFunction(document.location.protocol +"//"+ document.location.hostname + document.location.pathname);
-  if(document.location.port == 80 || document.location.port == "80"){
-    
+  if(document.location.port == 80 || document.location.port == "80" || document.location.port == "" || document.location.port == undefined){
+    GlobalURL = someFunction(document.location.protocol +"//"+ document.location.hostname + document.location.pathname);
   } else {
-    var portside = someFunction(GlobalURL);
-    GlobalURL = portside+":"+document.location.port+"/";
+    var portside = document.location.protocol +"//"+ document.location.hostname + ":"+document.location.port + document.location.pathname;
+    console.debug(document.location.port);
+    GlobalURL =  someFunction(portside);
   }
   
   
