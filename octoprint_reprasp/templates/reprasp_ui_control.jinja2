@@ -1,93 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>RepRasp - 3D Printer Touchscreen</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for("plugin.reprasp.static", filename="css/hui-min.css") }}">
-    <link rel="stylesheet" href="{{ url_for("plugin.reprasp.static", filename="css/pnotify.custom.min.css") }}">
-    <link rel="stylesheet" href="{{ url_for("plugin.reprasp.static", filename="css/reprasp.min.css") }}">
-  </head>
-  <body>
-    <div id="start_page" class="hidden">controls</div>
-    <div class="navmenu navmenu-default navmenu-fixed-right offcanvas">
-      <ul class="nav navmenu-nav minset">
-        <li><a href="index.html"><i class="fa fa-th-large fa-1"></i>  MAIN</a></li>
-        <li><a href="print.html"><i class="fa fa-cube fa-1"></i>  PRINT</a></li>
-        <li><a href="control.html"><i class="fa fa-arrows fa-1"></i>  MOVE</a></li>
-        <li><a href="terminal.html"><i class="fa fa-tasks fa-1"></i>  TERMINAL</a></li>
-        <li><a href="settings.html"><i class="fa fa-wrench fa-1"></i>  CONFIG</a></li>
-      </ul><img src="{{ url_for("plugin.reprasp.static", filename="img/reprasp_large.png") }}" style="max-width:130px;width:100%;margin:20px auto;" class="img-responsive">
-      <p style="max-width:130px;width:100%;margin:0px auto;" class="lead footertext">© 2015 huement.com</p>
+
+<div class="row">
+  <div class="col-sm-8 col-xs-7 lil-left">
+    <div class="btn-group btn-group-justified"><a href="#" class="btn btn-default btn-xs col-sm-4 home_x"><i class="fa fa-home fa-1"></i><br/>X</a><a href="#" class="btn btn-default btn-xs col-sm-4 home_y"><i class="fa fa-home fa-1"></i><br/>Y</a><a href="#" class="btn btn-default btn-xs col-sm-4 home_z"><i class="fa fa-home fa-1"></i><br/>Z</a></div>
+    <div style="height:20px;" class="push"></div>
+    <div class="btn-group btn-group-justified"><a href="#" class="btn btn-success btn-lg col-sm-4 plus_x"><i class="fa fa-plus fa-2"></i></a><a href="#" class="btn btn-success btn-lg col-sm-4 plus_y"><i class="fa fa-plus fa-2"></i></a><a href="#" class="btn btn-success btn-lg col-sm-4 plus_z"><i class="fa fa-plus fa-2"></i></a></div>
+    <div class="btn-group btn-group-justified"><a href="#" class="btn btn-danger btn-lg col-sm-4 minus_x"><i class="fa fa-minus fa-2"></i></a><a href="#" class="btn btn-danger btn-lg ol-sm-4 minus_y"><i class="fa fa-minus fa-2"></i></a><a href="#" class="btn btn-danger btn-lg col-sm-4 minus_z"><i class="fa fa-minus fa-2"></i></a></div>
+    <div style="height:20px;" class="push"></div>
+    <div class="btn-group btn-group-justified measured_amount"><a href="#" data-amount="0.1" class="btn btn-primary btn-xs col-sm-3">0.1</a><a href="#" data-amount="1" class="btn btn-primary active btn-xs col-sm-3">1</a><a href="#" data-amount="10" class="btn btn-primary btn-xs col-sm-3">10</a><a href="#" data-amount="100" class="btn btn-primary btn-xs col-sm-3">100</a></div>
+  </div>
+  <div class="col-sm-4 col-xs-5 small-pf">
+    <div class="test">
+      <select id="tool_select" class="form-control input-sm">
+        <option value="">Hotend 1</option>
+      </select>
+      <div style="height:10px;" class="push"></div>
+      <div class="input-group number-spinner"><span class="input-group-btn data-dwn">
+          <button data-dir="dwn" class="btn btn-info"><span class="fa fa-minus"></span></button></span>
+        <input type="text" value="5" min="5" max="100" class="form-control text-center"/><span class="input-group-btn data-up">
+          <button data-dir="up" class="btn btn-info"><span class="fa fa-plus"></span></button></span><span id="basic-addon2" class="input-group-addon">mm</span>
+      </div>
+      <div style="height:10px;" class="push"></div><a href="#" class="btn btn-default btn-sm btn-block"><i class="fa fa-filter"></i> Extrude</a>
     </div>
-    <div class="navbar navbar-fixed-top">
-      <button type="button" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" class="navbar-toggle action-button"><img src="{{ url_for("plugin.reprasp.static", filename="img/reprasp.png") }}" style="max-width:70px;width:100%;margin:0px auto;" class="img-responsive"></button>
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-8 col-xs-7 lil-left">
-          <div class="btn-group btn-group-justified"><a href="#" class="btn btn-default btn-xs col-sm-4 home_x"><i class="fa fa-home fa-1"></i><br>X</a><a href="#" class="btn btn-default btn-xs col-sm-4 home_y"><i class="fa fa-home fa-1"></i><br>Y</a><a href="#" class="btn btn-default btn-xs col-sm-4 home_z"><i class="fa fa-home fa-1"></i><br>Z</a></div>
-          <div style="height:20px;" class="push"></div>
-          <div class="btn-group btn-group-justified"><a href="#" class="btn btn-success btn-lg col-sm-4 plus_x"><i class="fa fa-plus fa-2"></i></a><a href="#" class="btn btn-success btn-lg col-sm-4 plus_y"><i class="fa fa-plus fa-2"></i></a><a href="#" class="btn btn-success btn-lg col-sm-4 plus_z"><i class="fa fa-plus fa-2"></i></a></div>
-          <div class="btn-group btn-group-justified"><a href="#" class="btn btn-danger btn-lg col-sm-4 minus_x"><i class="fa fa-minus fa-2"></i></a><a href="#" class="btn btn-danger btn-lg ol-sm-4 minus_y"><i class="fa fa-minus fa-2"></i></a><a href="#" class="btn btn-danger btn-lg col-sm-4 minus_z"><i class="fa fa-minus fa-2"></i></a></div>
-          <div style="height:20px;" class="push"></div>
-          <div class="btn-group btn-group-justified measured_amount"><a href="#" data-amount="0.1" class="btn btn-primary btn-xs col-sm-3">0.1</a><a href="#" data-amount="1" class="btn btn-primary active btn-xs col-sm-3">1</a><a href="#" data-amount="10" class="btn btn-primary btn-xs col-sm-3">10</a><a href="#" data-amount="100" class="btn btn-primary btn-xs col-sm-3">100</a></div>
-        </div>
-        <div class="col-sm-4 col-xs-5 small-pf">
-          <div class="test">
-            <select id="tool_select" class="form-control input-sm">
-              <option value="">Hotend 1</option>
-            </select>
-            <div style="height:10px;" class="push"></div>
-            <div class="input-group number-spinner"><span class="input-group-btn data-dwn">
-                <button data-dir="dwn" class="btn btn-info"><span class="fa fa-minus"></span></button></span>
-              <input type="text" value="5" min="5" max="100" class="form-control text-center"><span class="input-group-btn data-up">
-                <button data-dir="up" class="btn btn-info"><span class="fa fa-plus"></span></button></span><span id="basic-addon2" class="input-group-addon">mm</span>
-            </div>
-            <div style="height:10px;" class="push"></div><a href="#" class="btn btn-default btn-sm btn-block"><i class="fa fa-filter"></i> Extrude</a>
+    <div style="margin-top:20px" class="row small-nopad">
+      <div class="col-xs-8 small-pf-r">
+        <div role="group" aria-label="..." class="btn-group btn-group-justified">
+          <div role="group" aria-label="..." class="btn-group">
+            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-gears"></i><br/>   On</button>
           </div>
-          <div style="margin-top:20px" class="row small-nopad">
-            <div class="col-xs-8 small-pf-r">
-              <div role="group" aria-label="..." class="btn-group btn-group-justified">
-                <div role="group" aria-label="..." class="btn-group">
-                  <button type="button" class="btn btn-default btn-xs"><i class="fa fa-gears"></i><br>   On</button>
-                </div>
-                <div role="group" aria-label="..." class="btn-group">
-                  <button type="button" class="btn btn-default btn-xs"><i class="fa fa-gears"></i><br>   Off</button>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-4 small-pf-l">
-              <button type="button" class="btn btn-default btn-block btn-xs"><i class="fa fa-spinner"></i><br>Fan</button>
-            </div>
+          <div role="group" aria-label="..." class="btn-group">
+            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-gears"></i><br/>   Off</button>
           </div>
         </div>
       </div>
-    </div>
-    <script src="{{ url_for("plugin.reprasp.static", filename="js/jquery-2.1.4.min.js") }}"></script>
-    <script src="{{ url_for("plugin.reprasp.static", filename="js/hui.min.js") }}"></script>
-    <script src="{{ url_for("plugin.reprasp.static", filename="js/json2.js") }}"></script>
-    <script src="{{ url_for("plugin.reprasp.static", filename="js/pnotify.custom.min.js") }}"></script>
-    <script src="{{ url_for("plugin.reprasp.static", filename="js/pnotify-function.js") }}"></script>
-    <script src="{{ url_for("plugin.reprasp.static", filename="js/jstorage.min.js") }}"></script>
-    <script src="{{ url_for("plugin.reprasp.static", filename="js/moment.min.js") }}"></script>
-    <script src="{{ url_for("plugin.reprasp.static", filename="js/reprasp_miniui.js") }}"></script>
-    <script type="text/javascript">
-      console.debug("RepRasp Started");
-    </script>
-    <div id="Foots" class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="push">
-             
-            &nbsp;
-          </div>
-          <p class="text-right hidden-xs hidden-sm">© 2015 huement.com</p>
-          <div class="push">&nbsp;</div>
-        </div>
+      <div class="col-xs-4 small-pf-l">
+        <button type="button" class="btn btn-default btn-block btn-xs"><i class="fa fa-spinner"></i><br/>Fan</button>
       </div>
     </div>
-  </body>
-</html>
+  </div>
+</div>

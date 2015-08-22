@@ -6,9 +6,9 @@
     <title>RepRasp - 3D Printer Touchscreen</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('plugin.reprasp.static', filename='css/hui-min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('plugin.reprasp.static', filename='css/pnotify.custom.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('plugin.reprasp.static', filename='css/RepRasp.min.css') }}">
+    <link rel="stylesheet" href="webroot/css/hui-min.css">
+    <link rel="stylesheet" href="webroot/libs/pnotify.custom.min.css">
+    <link rel="stylesheet" href="webroot/css/RepRasp.css">
   </head>
   <body>
     <div class="navmenu navmenu-default navmenu-fixed-right offcanvas">
@@ -25,14 +25,21 @@
       <button type="button" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" class="navbar-toggle action-button"><img src="webroot/files/reprasp.png" style="max-width:70px;width:100%;margin:0px auto;" class="img-responsive"></button>
     </div>
     <div id="reprasp_main" class="container-fluid"></div>
-    <script src="{{ url_for('plugin.reprasp.static', filename='js/jquery-2.1.4.min.js') }}"></script>
-    <script src="{{ url_for('plugin.reprasp.static', filename='js/hui.min.js') }}"></script>
-    <script src="{{ url_for('plugin.reprasp.static', filename='libs/json2.js') }}"></script>
-    <script src="{{ url_for('plugin.reprasp.static', filename='libs/pnotify.custom.min.js') }}"></script>
-    <script src="{{ url_for('plugin.reprasp.static', filename='libs/pnotify-function.js') }}"></script>
-    <script src="{{ url_for('plugin.reprasp.static', filename='libs/jstorage.min.js') }}"></script>
-    <script src="{{ url_for('plugin.reprasp.static', filename='libs/moment.min.js') }}"></script>
-    <script src="{{ url_for('plugin.reprasp.static', filename='libs/RepRasp.min.js') }}"></script>
+    <script src="webroot/libs/jquery/jquery-2.1.4.min.js"></script>
+    <script src="webroot/js/hui.min.js"></script>
+    <!--Using a simple browser? these might help-->
+    <!--script(src='webroot/libs/modernizr/modernizr.2.6.2.custom.js')-->
+    <!--script(src='webroot/libs/minimal/consolefix.js')-->
+    <!--script(src='webroot/libs/minimal/css-media.js')-->
+    <!--script(src='webroot/libs/minimal/respond.min.js')-->
+    <!--script(src='webroot/libs/minimal/shiv.js')-->
+    <!--script(src='webroot/libs/minimal/html5shiv.js')-->
+    <script src="webroot/libs/json2.js"></script>
+    <script src="webroot/libs/pnotify.custom.min.js"></script>
+    <script src="webroot/libs/pnotify-function.js"></script>
+    <script src="webroot/libs/jstorage.min.js"></script>
+    <script src="webroot/libs/moment.min.js"></script>
+    <script src="webroot/js/RepRasp.min.js"></script>
     <script type="text/javascript">
       console.debug("RepRasp Started");
       

@@ -15,9 +15,8 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.BlueprintPlugin):
     def get_assets(self):
          return dict(
-             js=["js/reprasp_dashboard.js","js/reprasp_miniui.js","js/pnotify.custom.min.js","js/pnotify-function.js","js/jquery-2.1.4.min.js","js/hui.min.js","js/json2.js","js/moment.min.js","js/jstorage.min.js"],
-             css=["css/reprasp.css","css/reprasp.min.css","css/pnotify.custom.min.css","css/hui-min.css"],
-             less=["less/reprasp.less"]
+             js=["js/reprasp_dashboard.js","js/RepRasp.min.js","libs/pnotify.custom.min.js","libs/pnotify-function.js","libs/jquery-2.1.4.min.js","js/hui.min.js","libs/json2.js","libs/moment.min.js","libs/jstorage.min.js"],
+             css=["css/reprasp.css","css/RepRasp.min.css","css/pnotify.custom.min.css","css/hui-min.css"]
          )
          
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
@@ -31,11 +30,20 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             from flask import render_template
             return render_template("reprasp_ui_index.jinja2")
             
-    @octoprint.plugin.BlueprintPlugin.route("/move", methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.route("/control.html", methods=["GET"])
     def miniUiControlls(self):
             from flask import render_template
             return render_template("reprasp_ui_control.jinja2")
             
+    @octoprint.plugin.BlueprintPlugin.route("/status.html", methods=["GET"])
+    def miniUiStatus(self):
+            from flask import render_template
+            return render_template("reprasp_ui_status.jinja2")
+            
+    @octoprint.plugin.BlueprintPlugin.route("/print.html", methods=["GET"])
+    def miniUiPrint(self):
+            from flask import render_template
+            return render_template("reprasp_ui_print.jinja2")
             
     def on_after_startup(self):
             self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["iframeurl"]))
@@ -51,7 +59,6 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             dict(type="settings", custom_bindings=False)
         ]
 
-    
          
 __plugin_name__ = "RepRasp UI"
 __plugin_implementation__ = RepraspPlugin()

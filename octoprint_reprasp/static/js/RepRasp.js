@@ -1,4 +1,4 @@
-/*! 3d Printer Touch Screen interface - v0.0.1 - 2015-07-28\n* https://www.huement.com/reprasp
+/*! 3d Printer Touch Screen interface - v0.0.1 - 2015-08-22\n* https://www.huement.com/reprasp
 * Copyright (c) 2015 Derek Scott; License: MIT */
  
 /*! -- I Built This. Dont Hate. -- */
@@ -16,17 +16,24 @@
 * this is done so we dont need multiple document ready scripts and whatnot
 */
 function startindex(){ 
+  $("#printer_connect").on("click",function(eve){
+    eve.preventDefault();
+    getstatus();
+  });
+  
   //console.debug("start index page");
   getstatus();
 }
 
+var controlstartlimit = 0;
 function startcontrols(){ 
+  controlstartlimit++;
   //move printhead
   xyz_clicks();
-  
+
   //selected tool amount
   mmspinner();
-  
+
   //home axis buttons
   homerow_clicks();
   
@@ -216,17 +223,39 @@ function getstatus(){
 var GlobalURL = "octopi.local:5000";
 var GlobalKey = "";
 var GlobalDebug = 0;
+var GlobalContainer = $("#reprasp_main");
 
 function start_page(){
-  var startpage = $("#start_page").text();
-  if(startpage !== undefined && startpage !== null){
-    console.debug("current page: "+startpage);
-    if(startpage == "index"){ 
-      startindex();
-    }
-    if(startpage == "controls"){
-      startcontrols();
-    }
+  var savedvalue = $.jStorage.get("lastpage");
+  if(savedvalue == null || savedvalue == undefined || savedvalue == ""){
+    var pageid = "status";
+    var curl = pageid+".html";
+    LoadNewPage(curl,pageid);
+  } else {
+    var pageid = savedvalue;
+    var curl = pageid;
+    LoadNewPage(curl,pageid);
+  }
+}
+
+/* 
+IMPORTANT Function
+This function fires on each page load and can load one time or all time functions
+ie. clicks, or status updates
+*/
+function LoadThisPage(){
+  
+  if($(".navmenu-fixed-right").hasClass("in") === true){
+    $(".action-button").trigger("click");
+  }
+  
+  var sv = currentpageid;
+  if(sv == "status.html"){ 
+    startindex();
+  } else if(sv == "control.html"){
+    startcontrols();
+  } else {
+    startindex();
   }
 }
  
@@ -234,44 +263,92 @@ function start_page(){
 *  This Function is the First thing that happens and 
 *  sets up all the page variables for that page 
 */
-function configfile(){
-  GlobalKey = "123";
-  GlobalURL = "http://0.0.0.0:5000";
-  GlobalDebug = "1";
-  MumfordNote("Loading RepRasp...",false,"success");
-  start_page();
-  return true;
-    
-    var octo_url = "webroot/files/defaults.json";
-    $.ajax({
-        type: "GET",
-        url: octo_url,
-        dataType:"JSON",
-        success: function(data){
-          console.debug(data.apiurl);
-          GlobalKey = data.apikey;
-          GlobalURL = "http://"+data.apiurl;
-          GlobalDebug = data.debug;
-          
-          if(data.apiurl !== undefined && data.apiurl !== ""){
-            if(data.debug == 1){
-              //MumfordNote("Config Loaded",false,"success");
-            }
-            start_page();
-          } else {
-            //console.debug(data);
-            MumfordNote("Error. Config Not Found",false,"error","true");
-          }
-        },
-        error: function(data){
-            console.debug(data);
-            $(".status_panel").removeClass("panel-default").addClass("panel-danger");
-            $(".status_lead ").addClass("alert-danger");
-            $("#mac_state").text("no config found");
-        }
-    });
+function getURLParameters(url){
+
+    var result = {};
+    var searchIndex = url.indexOf("?");
+    if (searchIndex == -1 ) return result;
+    var sPageURL = url.substring(searchIndex +1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++)
+    {       
+        var sParameterName = sURLVariables[i].split('=');      
+        result[sParameterName[0]] = sParameterName[1];
+    }
+    return result;
 }
 
+function someFunction(site)     
+{     
+    return site.replace(/\/$/, "");
+} 
+
+function loadurl(){
+  var url = document.URL;
+  var apivalue = getURLParameters( url );
+  console.debug(apivalue);
+  
+  GlobalURL = someFunction(document.location.protocol +"//"+ document.location.hostname + document.location.pathname);
+  
+  if(apivalue.apikey == null || apivalue.apikey == undefined || apivalue.apikey == ""){
+    var savedvalue = $.jStorage.get("apikey");
+    if(savedvalue == null || savedvalue == undefined || savedvalue == ""){
+      MumfordNote("Error. ?apikey= not set.",false,"error","true");
+    } else {
+      GlobalKey = savedvalue;
+      start_page();
+    }
+  } else {
+    var savedapivalue = $.jStorage.set("apikey", apivalue.apikey);
+    GlobalKey = apivalue.apikey;
+    start_page();
+  }
+}
+
+var currentpageid = "";
+function LoadNewPage(url,pageid){
+  console.debug(url);
+  currentpageid = pageid;
+  var finalurl = GlobalURL+"/"+url+"?apikey="+GlobalKey;
+  console.debug(finalurl);
+  $.ajax({
+      type: "post",
+      url: finalurl,
+      dataType:"html",
+      contentType: "text/html",
+      success: function(data){
+        //console.debug(data);
+        GlobalContainer.html(data);
+        $.jStorage.set("lastpage", currentpageid);
+        setTimeout("LoadThisPage()",250);
+      },
+      error: function(data){
+        console.debug(data);
+        MumfordNote("API ERROR. Page Not Loaded.",false,"error");
+      }
+  });
+}
+
+var configmode = "url";
+
 $(document).ready(function() {
-  configfile();
+  /*
+  $(".minset li a").each(function(){
+    var currenturl = $(this).attr("href");
+    var newurl = currenturl+"?apikey="+GlobalKey;
+    $(this).attr("href",newurl);
+  });
+  */
+  $(".minset li a").on("click",function(eve){
+    eve.preventDefault();
+    var curl = $(this).data("pageid");
+    var pageid = curl+".html";
+    LoadNewPage(curl,pageid);
+  });
+  
+  if(configmode == "file"){
+    configfile();
+  } else {
+    loadurl();
+  }
 });
