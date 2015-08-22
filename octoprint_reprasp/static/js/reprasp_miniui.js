@@ -238,7 +238,9 @@ function configfile(){
   GlobalKey = "123";
   GlobalURL = "http://0.0.0.0:5000";
   GlobalDebug = "1";
-  return false;
+  MumfordNote("Loading RepRasp...",false,"success");
+  start_page();
+  return true;
     
     var octo_url = "webroot/files/defaults.json";
     $.ajax({
