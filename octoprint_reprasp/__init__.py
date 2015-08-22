@@ -30,17 +30,17 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             from flask import render_template
             return render_template("reprasp_ui_index.jinja2")
             
-    @octoprint.plugin.BlueprintPlugin.route("/control.html", methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.route("/control.html", methods=["POST"])
     def miniUiControlls(self):
             from flask import render_template
             return render_template("reprasp_ui_control.jinja2")
             
-    @octoprint.plugin.BlueprintPlugin.route("/status.html", methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.route("/status.html", methods=["POST"])
     def miniUiStatus(self):
             from flask import render_template
             return render_template("reprasp_ui_status.jinja2")
             
-    @octoprint.plugin.BlueprintPlugin.route("/print.html", methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.route("/print.html", methods=["POST"])
     def miniUiPrint(self):
             from flask import render_template
             return render_template("reprasp_ui_print.jinja2")
