@@ -18,21 +18,21 @@
         <li><a href="control.html" data-pageid="control"><i class="fa fa-arrows fa-1"></i>  MOVE</a></li>
         <li><a href="terminal.html" data-pageid="terminal"><i class="fa fa-tasks fa-1"></i>  TERMINAL</a></li>
         <li><a href="settings.html" data-pageid="settings"><i class="fa fa-wrench fa-1"></i>  CONFIG</a></li>
-      </ul><img src="webroot/files/reprasp_large.png" style="max-width:130px;width:100%;margin:20px auto;" class="img-responsive">
+      </ul><img src="{{ url_for('plugin.reprasp.static', filename='img/reprasp_large.png') }}" style="max-width:130px;width:100%;margin:20px auto;" class="img-responsive">
       <p style="max-width:130px;width:100%;margin:0px auto;" class="lead footertext">© 2015 huement.com</p>
     </div>
     <div class="navbar navbar-fixed-top">
-      <button type="button" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" class="navbar-toggle action-button"><img src="webroot/files/reprasp.png" style="max-width:70px;width:100%;margin:0px auto;" class="img-responsive"></button>
+      <button type="button" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" class="navbar-toggle action-button"><img src="{{ url_for('plugin.reprasp.static', filename='img/reprasp.png') }}" style="max-width:70px;width:100%;margin:0px auto;" class="img-responsive"></button>
     </div>
     <div id="reprasp_main" class="container-fluid"></div>
-    <script src="{{ url_for('plugin.reprasp.static', filename='js/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ url_for('plugin.reprasp.static', filename='libs/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ url_for('plugin.reprasp.static', filename='js/hui.min.js') }}"></script>
     <script src="{{ url_for('plugin.reprasp.static', filename='libs/json2.js') }}"></script>
     <script src="{{ url_for('plugin.reprasp.static', filename='libs/pnotify.custom.min.js') }}"></script>
     <script src="{{ url_for('plugin.reprasp.static', filename='libs/pnotify-function.js') }}"></script>
     <script src="{{ url_for('plugin.reprasp.static', filename='libs/jstorage.min.js') }}"></script>
     <script src="{{ url_for('plugin.reprasp.static', filename='libs/moment.min.js') }}"></script>
-    <script src="{{ url_for('plugin.reprasp.static', filename='libs/RepRasp.min.js') }}"></script>
+    <script src="{{ url_for('plugin.reprasp.static', filename='js/RepRasp.min.js') }}"></script>
     <script type="text/javascript">
       console.debug("RepRasp Started");
       
