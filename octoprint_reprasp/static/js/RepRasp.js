@@ -289,6 +289,13 @@ function loadurl(){
   console.debug(apivalue);
   
   GlobalURL = someFunction(document.location.protocol +"//"+ document.location.hostname + document.location.pathname);
+  if(document.location.port == 80 || document.location.port == "80"){
+    
+  } else {
+    var portside = someFunction(GlobalURL);
+    GlobalURL = portside+":"+document.location.port+"/";
+  }
+  
   
   if(apivalue.apikey == null || apivalue.apikey == undefined || apivalue.apikey == ""){
     var savedvalue = $.jStorage.get("apikey");
