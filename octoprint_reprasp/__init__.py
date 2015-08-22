@@ -13,15 +13,23 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.AssetPlugin,
                     octoprint.plugin.BlueprintPlugin):
+    def get_assets(self):
+         return dict(
+             js=["js/reprasp.js"],
+             css=["css/reprasp.css"],
+             less=["less/reprasp.less"]
+         )
+         
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
-    @octoprint.plugin.BlueprintPlugin.route("/mini", methods=["GET"])
     def myEcho(self):
             if not "text" in flask.request.values:
                 return flask.make_response("Expected a text to echo back.", 400)
             return flask.request.values["text"]
-            
+    
+    @octoprint.plugin.BlueprintPlugin.route("/", methods=["GET"])
     def miniUi(self):
-            return flask.request.values["text"]
+            from flask import render_template
+            return render_template("reprasp_ui.jinja2")
             
     def on_after_startup(self):
             self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["iframeurl"]))
@@ -37,12 +45,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             dict(type="settings", custom_bindings=False)
         ]
 
-    def get_assets(self):
-         return dict(
-             js=["js/reprasp.js"],
-             css=["css/reprasp.css"],
-             less=["less/reprasp.less"]
-         )
+    
          
 __plugin_name__ = "RepRasp UI"
 __plugin_implementation__ = RepraspPlugin()
