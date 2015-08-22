@@ -15,8 +15,8 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.BlueprintPlugin):
     def get_assets(self):
          return dict(
-             js=["js/reprasp.js"],
-             css=["css/reprasp.css"],
+             js=["js/reprasp_dashboard.js","js/reprasp_miniui.js","js/pnotify.custom.min.js","js/pnotify-function.js","js/jquery-2.1.4.min.js","js/hui.min.js","js/json2.js","js/moment.min.js","js/jstorage.min.js"],
+             css=["css/reprasp.css","css/reprasp.min.css","css/pnotify.custom.min.css","css/hui-min.css"],
              less=["less/reprasp.less"]
          )
          
@@ -29,7 +29,13 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
     @octoprint.plugin.BlueprintPlugin.route("/", methods=["GET"])
     def miniUi(self):
             from flask import render_template
-            return render_template("reprasp_ui.jinja2")
+            return render_template("reprasp_ui_index.jinja2")
+            
+    @octoprint.plugin.BlueprintPlugin.route("/move", methods=["GET"])
+    def miniUiControlls(self):
+            from flask import render_template
+            return render_template("reprasp_ui_control.jinja2")
+            
             
     def on_after_startup(self):
             self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["iframeurl"]))
