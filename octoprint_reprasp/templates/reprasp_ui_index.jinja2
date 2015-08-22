@@ -6,9 +6,9 @@
     <title>RepRasp - 3D Printer Touchscreen</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/hui-min.css">
-    <link rel="stylesheet" href="css/pnotify.custom.min.css">
-    <link rel="stylesheet" href="css/reprasp.min.css">
+    <link rel="stylesheet" href="{{ url_for("plugin.reprasp.static", filename="css/hui-min.css") }}">
+    <link rel="stylesheet" href="{{ url_for("plugin.reprasp.static", filename="css/pnotify.custom.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for("plugin.reprasp.static", filename="css/reprasp.min.css") }}">
   </head>
   <body>
     <div id="start_page" class="hidden">index</div>
@@ -19,11 +19,11 @@
         <li><a href="control.html"><i class="fa fa-arrows fa-1"></i>  MOVE</a></li>
         <li><a href="terminal.html"><i class="fa fa-tasks fa-1"></i>  TERMINAL</a></li>
         <li><a href="settings.html"><i class="fa fa-wrench fa-1"></i>  CONFIG</a></li>
-      </ul><img src="webroot/files/reprasp_large.png" style="max-width:130px;width:100%;margin:20px auto;" class="img-responsive">
+      </ul><img src="{{ url_for("plugin.reprasp.static", filename="img/reprasp_large.png") }}" style="max-width:130px;width:100%;margin:20px auto;" class="img-responsive">
       <p style="max-width:130px;width:100%;margin:0px auto;" class="lead footertext">© 2015 huement.com</p>
     </div>
     <div class="navbar navbar-fixed-top">
-      <button type="button" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" class="navbar-toggle action-button"><img src="webroot/files/reprasp.png" style="max-width:70px;width:100%;margin:0px auto;" class="img-responsive"></button>
+      <button type="button" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" class="navbar-toggle action-button"><img src="{{ url_for("plugin.reprasp.static", filename="img/reprasp.png") }}" style="max-width:70px;width:100%;margin:0px auto;" class="img-responsive"></button>
     </div>
     <div class="container-fluid">
       <div class="row">
@@ -65,14 +65,14 @@
       </div>
     </div>
     <!--include includes/index.html-->
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/hui.min.js"></script>
-    <script src="js/json2.js"></script>
-    <script src="js/pnotify.custom.min.js"></script>
-    <script src="js/pnotify-function.js"></script>
-    <script src="js/jstorage.min.js"></script>
-    <script src="js/moment.min.js"></script>
-    <script src="js/reprasp_miniui.js"></script>
+    <script src="{{ url_for("plugin.reprasp.static", filename="js/jquery-2.1.4.min.js") }}"></script>
+    <script src="{{ url_for("plugin.reprasp.static", filename="js/hui.min.js") }}"></script>
+    <script src="{{ url_for("plugin.reprasp.static", filename="js/json2.js") }}"></script>
+    <script src="{{ url_for("plugin.reprasp.static", filename="js/pnotify.custom.min.js") }}"></script>
+    <script src="{{ url_for("plugin.reprasp.static", filename="js/pnotify-function.js") }}"></script>
+    <script src="{{ url_for("plugin.reprasp.static", filename="js/jstorage.min.js") }}"></script>
+    <script src="{{ url_for("plugin.reprasp.static", filename="js/moment.min.js") }}"></script>
+    <script src="{{ url_for("plugin.reprasp.static", filename="js/reprasp_miniui.js") }}"></script>
     <script type="text/javascript">
       console.debug("RepRasp Started");
     </script>
