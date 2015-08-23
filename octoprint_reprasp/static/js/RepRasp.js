@@ -376,17 +376,23 @@ $(document).ready(function() {
     var newurl = currenturl+"?apikey="+GlobalKey;
     $(this).attr("href",newurl);
   });
-  */
-  $(".minset li a").on("click",function(eve){
-    eve.preventDefault();
-    var pageid = $(this).data("pageid");
-    var curl = pageid+".html";
-    LoadNewPage(curl,pageid);
-  });
+  test
+  */ 
+      
+  if($("#reprasp_main").html() !== null && $("#reprasp_main").html() !== undefined ){
+    $(".minset li a").on("click",function(eve){
+      eve.preventDefault();
+      var pageid = $(this).data("pageid");
+      var curl = pageid+".html";
+      LoadNewPage(curl,pageid);
+    });
   
-  if(configmode == "file"){
-    configfile();
-  } else {
-    loadurl();
+    if(configmode == "file"){
+      configfile();
+    } else {
+      loadurl();
+    }
   }
+  
+  
 });
