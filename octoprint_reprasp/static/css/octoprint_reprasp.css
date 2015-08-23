@@ -3,6 +3,7 @@
 }
 
 @media screen and (max-width: 600px){
+  
   #reprasp-ui {
     position:fixed;
     left:10px;
@@ -13,4 +14,10 @@
     border:2px solid #eeeeee;
     z-index:9999;
   }
+  
+  #reprasp-ui a, #reprasp-ui i {
+    font-size:16px;
+    color:#FFFFFF;
+  }
+  
 }
