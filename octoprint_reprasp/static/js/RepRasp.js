@@ -226,7 +226,7 @@ var GlobalDebug = 0;
 var GlobalContainer = $("#reprasp_main");
 
 function start_page(){
-  var savedvalue = $.jStorage.get("lastpage");
+  var savedvalue = $.jStorage.get("lastpage11");
   if(savedvalue == null || savedvalue == undefined || savedvalue == ""){
     var pageid = "status";
     var curl = pageid+".html";
@@ -324,9 +324,9 @@ function LoadNewPage(url,pageid){
       dataType:"html",
       contentType: "text/html",
       success: function(data){
-        //console.debug(data);
+        console.debug(data);
         GlobalContainer.html(data);
-        $.jStorage.set("lastpage", currentpageid);
+        $.jStorage.set("lastpage11", currentpageid);
         setTimeout("LoadThisPage()",250);
       },
       error: function(data){
@@ -348,8 +348,8 @@ $(document).ready(function() {
   */
   $(".minset li a").on("click",function(eve){
     eve.preventDefault();
-    var curl = $(this).data("pageid");
-    var pageid = curl+".html";
+    var pageid = $(this).data("pageid");
+    var curl = pageid+".html";
     LoadNewPage(curl,pageid);
   });
   
