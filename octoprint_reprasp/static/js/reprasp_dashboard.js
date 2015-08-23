@@ -29,7 +29,7 @@ $(function() {
             
             var apiurl = $("#settings-apikey").val();
         
-            var value =$("#repraspapi").val();
+            var value =$("#repraspmini").val();
             value = value.replace("##API##", apiurl);
             console.debug(apiurl);
             $("#repraspapi").val(value);
