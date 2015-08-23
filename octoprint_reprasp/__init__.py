@@ -15,8 +15,8 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.BlueprintPlugin):
     def get_assets(self):
          return dict(
-             js=["js/reprasp_dashboard.js","js/RepRasp.min.js","libs/pnotify.custom.min.js","libs/pnotify-function.js","libs/jquery-2.1.4.min.js","js/hui.min.js","libs/json2.js","libs/moment.min.js","libs/jstorage.min.js"],
-             css=["css/reprasp.css","css/RepRasp.min.css","css/pnotify.custom.min.css","css/hui-min.css"]
+             js=["js/reprasp_dashboard.js","libs/jstorage.min.js"],
+             css=["css/reprasp.css"]
          )
          
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
@@ -24,6 +24,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             if not "text" in flask.request.values:
                 return flask.make_response("Expected a text to echo back.", 400)
             return flask.request.values["text"]
+    
     
     @octoprint.plugin.BlueprintPlugin.route("/", methods=["GET"])
     def miniUi(self):
@@ -44,9 +45,19 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
     def miniUiPrint(self):
             from flask import render_template
             return render_template("reprasp_ui_print.jinja2")
+    
+    @octoprint.plugin.BlueprintPlugin.route("/settings.html", methods=["POST"])
+    def miniUiPrint(self):
+            from flask import render_template
+            return render_template("reprasp_ui_settings.jinja2")
+            
+    @octoprint.plugin.BlueprintPlugin.route("/terminal.html", methods=["POST"])
+    def miniUiPrint(self):
+            from flask import render_template
+            return render_template("reprasp_ui_terminal.jinja2")
             
     def on_after_startup(self):
-            self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["iframeurl"]))
+            self._logger.info("RepRasp UI Loaded! (more: %s)" % self._settings.get(["miniurl"]))
             
     def get_settings_defaults(self):
             return dict(url="https://www.huement.com",apiurl="/plugin/reprasp/echo?apikey=##API##&text=##TEXT##",miniurl="/plugin/reprasp/?apikey=##API##",iframeurl="testthis")
