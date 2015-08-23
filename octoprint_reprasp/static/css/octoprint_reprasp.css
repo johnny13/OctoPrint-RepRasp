@@ -1,0 +1,16 @@
+#reprasp-ui {
+  display:none;
+}
+
+@media screen and (max-width: 600px){
+  #reprasp-ui {
+    position:fixed;
+    left:10px;
+    top:10px;
+    display:block;
+    padding:10px;
+    background:#FFFFFF;
+    border:2px solid #eeeeee;
+    z-index:9999;
+  }
+}

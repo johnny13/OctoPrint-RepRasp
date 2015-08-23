@@ -58,3 +58,10 @@ $(function() {
     
     
 });
+
+$(document).ready(function() {
+  $("#reprasp-reload").on("click",function(eve){
+    eve.preventDefault();
+    window.location.reload();
+  });
+});
