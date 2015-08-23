@@ -274,9 +274,9 @@ function LoadThisPage(){
   }
   
   var sv = currentpageid;
-  if(sv == "status.html"){ 
+  if(sv == "status.html"||sv == "status"){ 
     startindex();
-  } else if(sv == "control.html"){
+  } else if(sv == "control.html"||sv == "control"){
     startcontrols();
   } else {
     startindex();
@@ -340,6 +340,13 @@ var currentpageid = "";
 function LoadNewPage(url,pageid){
   console.debug(url);
   currentpageid = pageid;
+  
+  if (url.toLowerCase().indexOf("html") >= 0){
+    //gtg  
+  } else {
+    url = url+".html"; 
+  }
+  
   var finalurl = GlobalURL+"/"+url+"?apikey="+GlobalKey;
   console.debug(finalurl);
   $.ajax({
