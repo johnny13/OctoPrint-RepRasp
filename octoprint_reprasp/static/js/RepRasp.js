@@ -140,7 +140,15 @@ function xyz_clicks(){
 
 function movedirection(xamt,yamt,zamt){
   
-  var xocto_url = GlobalURL+"/api/printer/printhead";
+  if(document.location.port == 80 || document.location.port == "80" || document.location.port == "" || document.location.port == undefined){
+    PGlobalURL = someFunction(document.location.protocol +"//"+ document.location.hostname);
+  } else {
+    var portside = document.location.protocol +"//"+ document.location.hostname + ":"+document.location.port;
+    console.debug(document.location.port);
+    PGlobalURL =  someFunction(portside);
+  }
+   
+  var xocto_url = PGlobalURL+"/api/printer/printhead";
   var dirdata = {"command": "jog", "x":xamt, "y":yamt, "z":zamt};
   var xjd = JSON.stringify(dirdata);
   
@@ -163,7 +171,15 @@ function movedirection(xamt,yamt,zamt){
 
 function homeaxis(hdata){
   
-  var hocto_url = GlobalURL+"/api/printer/printhead";
+  if(document.location.port == 80 || document.location.port == "80" || document.location.port == "" || document.location.port == undefined){
+    PGlobalURL = someFunction(document.location.protocol +"//"+ document.location.hostname);
+  } else {
+    var portside = document.location.protocol +"//"+ document.location.hostname + ":"+document.location.port;
+    console.debug(document.location.port);
+    PGlobalURL =  someFunction(portside);
+  }
+  
+  var hocto_url = PGlobalURL+"/api/printer/printhead";
   var hjd = JSON.stringify(hdata);
 
   $.ajax({
@@ -186,7 +202,15 @@ function homeaxis(hdata){
 
 function getstatus(){
   
-    var octo_url = GlobalURL+"/api/connection";
+    if(document.location.port == 80 || document.location.port == "80" || document.location.port == "" || document.location.port == undefined){
+      PGlobalURL = someFunction(document.location.protocol +"//"+ document.location.hostname);
+    } else {
+      var portside = document.location.protocol +"//"+ document.location.hostname + ":"+document.location.port;
+      console.debug(document.location.port);
+      PGlobalURL =  someFunction(portside);
+    }
+    
+    var octo_url = PGlobalURL+"/api/connection";
     console.debug(octo_url);
   
     $.ajax({
