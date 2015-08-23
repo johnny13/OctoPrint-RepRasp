@@ -15,7 +15,7 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.BlueprintPlugin):
     def get_assets(self):
          return dict(
-             js=["js/reprasp_dashboard.js","libs/jstorage.min.js"],
+             js=["js/reprasp_dashboard.js" , "libs/jstorage.min.js"],
              css=["css/reprasp.css"]
          )
          
@@ -24,7 +24,6 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
             if not "text" in flask.request.values:
                 return flask.make_response("Expected a text to echo back.", 400)
             return flask.request.values["text"]
-    
     
     @octoprint.plugin.BlueprintPlugin.route("/", methods=["GET"])
     def miniUi(self):
