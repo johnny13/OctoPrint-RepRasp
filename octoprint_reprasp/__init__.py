@@ -15,8 +15,8 @@ class RepraspPlugin(octoprint.plugin.StartupPlugin,
                     octoprint.plugin.BlueprintPlugin):
     def get_assets(self):
          return dict(
-             js=["js/reprasp_dashboard.js","js/RepRasp.min.js","libs/json2.js","libs/jstorage.min.js"],
-             css=["css/reprasp.css","css/RepRasp.min.css","css/pnotify.custom.min.css","css/hui-min.css"]
+             js=["js/reprasp_dashboard.js"],
+             css=["css/reprasp.css"]
          )
          
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
